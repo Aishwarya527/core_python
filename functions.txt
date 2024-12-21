@@ -1,0 +1,45 @@
+def check_password_strength(password):
+    if len(password) < 10 or len(password) > 15:
+        return "Password should consist of minimum 10 and maximum 15 characters."
+    elif not any(char.isupper() for char in password):
+        return "Password should contain at least 1 uppercase letter."
+    elif not any(char.islower() for char in password):
+        return "Password should contain at least 1 lowercase letter."
+    elif not any(char.isdigit() for char in password):
+        return "Password should contain at least 1 digit."
+    elif not any(char in ['@', '#', '&'] for char in password):
+        return "Password should contain at least 1 special character (@, #, or &)."
+    elif any(char.isspace() for char in password):
+        return "Password should not contain any white spaces."
+    elif password.endswith('.') or password.endswith('@'):
+        return "Password should not end with a dot (.) or @ symbol."
+    return "Strong Password."
+
+password = input("Enter your password: ")
+print(check_password_strength(password))
+
+-------------------------------------------------------------------------------------------------------
+
+def calc_total(cart):
+    total = 0
+    discounted_cart = {}
+    for item, price in cart.items():
+        if 20000 <= price <= 50000:
+            discounted_price = price * 0.9
+        elif price > 50000:
+            discounted_price = price * 0.85
+        else:
+            discounted_price = price
+        discounted_cart[item] = discounted_price
+        total += discounted_price
+    return discounted_cart, total
+
+cart = {'Laptop': 50000, 'Headphones': 2000, 'Mouse': 35000, 'Keyboard': 1500, 'Monitor': 8000, 'USB Drive': 1000}
+discounted_cart, total = calc_total(cart)
+
+print(f"Cart items: {cart}")
+print(f"Discounted prices: {discounted_cart}")
+print(f"Total price after discounts: {total}")
+
+
+
